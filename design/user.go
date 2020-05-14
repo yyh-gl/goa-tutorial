@@ -34,6 +34,22 @@ var _ = dsl.Service("user", func() {
 			dsl.Response(dsl.StatusCreated)
 		})
 	})
+
+	dsl.Method("index", func() {
+		dsl.Meta("swagger:summary", "ユーザ一覧取得")
+
+		dsl.Payload(dsl.Empty)
+
+		dsl.Result(func() {
+			dsl.Attribute("users", dsl.ArrayOf(user), "ユーザ一覧")
+			dsl.Required("users")
+		})
+
+		dsl.HTTP(func() {
+			dsl.GET("")
+			dsl.Response(dsl.StatusOK)
+		})
+	})
 })
 
 var user = dsl.Type("User", func() {
