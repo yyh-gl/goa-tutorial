@@ -2,6 +2,7 @@ package design
 
 import (
 	"goa.design/goa/v3/dsl"
+	cors "goa.design/plugins/v3/cors/dsl"
 )
 
 var _ = dsl.API("goa-tutorial", func() {
@@ -12,5 +13,12 @@ var _ = dsl.API("goa-tutorial", func() {
 	})
 	dsl.HTTP(func() {
 		dsl.Path("/api/v1")
+	})
+
+	cors.Origin("*", func() {
+		cors.Headers("*")
+		cors.Methods("GET", "POST", "DELETE")
+		cors.MaxAge(100)
+		cors.Credentials()
 	})
 })
