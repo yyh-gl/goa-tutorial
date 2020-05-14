@@ -30,3 +30,7 @@ func (u user) Create(ctx context.Context, p *goa.CreatePayload) (*goa.CreateResu
 		},
 	}, nil
 }
+
+func (u user) Index(ctx context.Context) (*goa.IndexResult, error) {
+	return nil, nil
+}
