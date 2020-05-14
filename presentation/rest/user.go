@@ -20,7 +20,7 @@ func NewUser(u usecase.User) goa.Service {
 
 func (u user) Create(ctx context.Context, p *goa.CreatePayload) (*goa.CreateResult, error) {
 	// ユーザ作成に関するビジネスロジックは
-	// usecase層以下にあるため
+	// usecase層以下にあるため（今回で言えば Register()内にメインのロジックがある）
 	// gRPCに乗り換えるときはpresentation/restだけを修正すればOK
 	ru := u.u.Register(p.Name, p.Age)
 	return &goa.CreateResult{
