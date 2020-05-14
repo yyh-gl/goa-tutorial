@@ -1,0 +1,28 @@
+version: "3.7"
+
+services:
+  swagger-ui:
+    image: swaggerapi/swagger-ui
+    volumes:
+      - ./gen/http/openapi.yaml:/etc/swagger/swagger.yaml
+    environment:
+      SWAGGER_JSON: /etc/swagger/swagger.yaml
+    ports:
+      - "8080:8080"
+    networks:
+      - swagger_link
+
+  api:
+    image: golang:1.14.2-alpine
+    command: ["sh", "-c", "go run main.go"]
+    volumes:
+      - .:/go/src/goa-tutorial
+    working_dir: /go/src/goa-tutorial
+    ports:
+      - "8088:8088"
+    networks:
+      - swagger_link
+
+networks:
+  swagger_link:
+    driver: bridge
